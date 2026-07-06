@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "ppt-generator": {
+      "command": "node",
+      "args": ["C:/Users/kaiwa/node_modules/@botrun/mcp-ppt-generator/dist/index.js"]
+    }
+  }
+}

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天气智能体 · 聊天</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #f5f7fb;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .chat-container {
+            width: 100%;
+            max-width: 720px;
+            height: 90vh;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .chat-header {
+            padding: 20px 28px;
+            border-bottom: 1px solid #eef2f6;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .chat-header h1 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+        .chat-header .badge {
+            background: #e8f0fe;
+            color: #1a73e8;
+            font-size: 12px;
+            padding: 2px 12px;
+            border-radius: 20px;
+        }
+        .messages {
+            flex: 1;
+            padding: 20px 28px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            background: #fafcff;
+        }
+        .message {
+            max-width: 80%;
+            padding: 12px 18px;
+            border-radius: 18px;
+            line-height: 1.6;
+            word-break: break-word;
+            animation: fadeIn 0.2s ease;
+        }
+        .message.user {
+            align-self: flex-end;
+            background: #1a73e8;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+        .message.assistant {
+            align-self: flex-start;
+            background: #f0f4f9;
+            color: #1a1a2e;
+            border-bottom-left-radius: 4px;
+        }
+        .message .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background: #1a1a2e;
+            margin-left: 2px;
+            animation: blink 0.8s step-end infinite;
+        }
+
+        /* ===== Markdown 富文本样式 ===== */
+        .message.assistant h1, .message.assistant h2, .message.assistant h3,
+        .message.assistant h4, .message.assistant h5, .message.assistant h6 {
+            margin: 12px 0 6px;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+        .message.assistant h1 { font-size: 1.4em; border-bottom: 1px solid #dce3ed; padding-bottom: 4px; }
+        .message.assistant h2 { font-size: 1.25em; }
+        .message.assistant h3 { font-size: 1.1em; }
+        .message.assistant h4 { font-size: 1.05em; }
+
+        .message.assistant p { margin: 4px 0; }
+        .message.assistant p:first-child { margin-top: 0; }
+        .message.assistant p:last-child { margin-bottom: 0; }
+
+        .message.assistant ul, .message.assistant ol {
+            margin: 6px 0;
+            padding-left: 20px;
+        }
+        .message.assistant li { margin: 2px 0; }
+
+        .message.assistant strong { font-weight: 600; color: #0d1b2a; }
+        .message.assistant em { font-style: italic; }
+
+        .message.assistant a {
+            color: #1a73e8;
+            text-decoration: underline;
+            word-break: break-all;
+        }
+        .message.assistant a:hover { color: #1557b0; }
+
+        /* 行内代码 */
+        .message.assistant code {
+            background: #e2e8f0;
+            color: #c7254e;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Cascadia Code', 'Fira Code', 'JetBrains Mono', Consolas, monospace;
+            font-size: 0.88em;
+        }
+
+        /* 代码块 */
+        .message.assistant pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 14px 16px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+        .message.assistant pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+            border-radius: 0;
+            font-size: 0.85em;
+        }
+
+        /* 引用块 */
+        .message.assistant blockquote {
+            border-left: 3px solid #1a73e8;
+            padding: 4px 0 4px 12px;
+            margin: 8px 0;
+            color: #4a5568;
+            background: rgba(26,115,232,0.04);
+            border-radius: 0 6px 6px 0;
+        }
+
+        /* 表格 */
+        .message.assistant table {
+            border-collapse: collapse;
+            margin: 8px 0;
+            font-size: 0.9em;
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .message.assistant th, .message.assistant td {
+            border: 1px solid #dce3ed;
+            padding: 6px 12px;
+            text-align: left;
+        }
+        .message.assistant th {
+            background: #e8f0fe;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+        .message.assistant tr:nth-child(even) td {
+            background: #f8fafc;
+        }
+
+        /* 分割线 */
+        .message.assistant hr {
+            border: none;
+            border-top: 1px solid #dce3ed;
+            margin: 12px 0;
+        }
+
+        /* 图片 */
+        .message.assistant img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 6px 0;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .input-area {
+            padding: 16px 28px 24px;
+            border-top: 1px solid #eef2f6;
+            display: flex;
+            gap: 12px;
+            background: white;
+        }
+        .input-area input {
+            flex: 1;
+            padding: 12px 18px;
+            border: 1px solid #dce3ed;
+            border-radius: 40px;
+            font-size: 15px;
+            outline: none;
+            transition: border 0.2s;
+        }
+        .input-area input:focus {
+            border-color: #1a73e8;
+        }
+        .input-area button {
+            padding: 12px 28px;
+            background: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+        .input-area button:hover { background: #1557b0; }
+        .input-area button:active { transform: scale(0.96); }
+        .input-area button:disabled {
+            background: #a0b8d4;
+            cursor: not-allowed;
+        }
+        .status {
+            font-size: 13px;
+            color: #5f6b7a;
+            padding: 0 28px 12px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .clear-btn {
+            background: none;
+            border: none;
+            color: #a0b8d4;
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: underline;
+        }
+        .clear-btn:hover { color: #1a1a2e; }
+    </style>
+</head>
+<body>
+<div class="chat-container">
+    <div class="chat-header">
+        <h1>🌤️ 天气智能体</h1>
+<!--        <button id="showDocsBtn" style="margin-left:auto; background:transparent; border:1px solid #dce3ed; border-radius:20px; padding:4px 14px; cursor:pointer;">📄 文档</button>-->
+    </div>
+    <div class="messages" id="messages"></div>
+    <div id="docsContainer" style="display:none; padding:20px; overflow-y:auto; height:100%; background:#fafcff;">
+    <!-- 渲染后的 Markdown 将显示在这里 -->
+</div>
+    <div class="status">
+        <span id="statusText">就绪</span>
+        <button class="clear-btn" id="clearBtn">清空对话</button>
+    </div>
+    <div class="input-area">
+        <input type="text" id="userInput" placeholder="输入消息…" autofocus />
+        <button id="sendBtn">发送</button>
+    </div>
+</div>
+<script>
+    const messagesEl = document.getElementById('messages');
+    const userInput = document.getElementById('userInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const statusText = document.getElementById('statusText');
+    const clearBtn = document.getElementById('clearBtn');
+
+    // 配置 marked：开启 GFM（表格、任务列表等）和自动换行
+    marked.setOptions({ breaks: true, gfm: true });
+
+    let isStreaming = false;
+
+    function renderMarkdown(text) {
+        return marked.parse(text);
+    }
+
+    function addMessage(role, content, isPartial = false) {
+        if (isPartial && role === 'assistant') {
+            const lastMsg = messagesEl.lastElementChild;
+            if (lastMsg && lastMsg.dataset.role === 'assistant' && lastMsg.dataset.partial === 'true') {
+                lastMsg.innerHTML = renderMarkdown(content);
+                messagesEl.scrollTop = messagesEl.scrollHeight;
+                return;
+            }
+        }
+        const div = document.createElement('div');
+        div.className = `message ${role}`;
+        if (role === 'assistant') {
+            div.innerHTML = renderMarkdown(content);
+        } else {
+            div.textContent = content;
+        }
+        if (isPartial && role === 'assistant') {
+            div.dataset.role = 'assistant';
+            div.dataset.partial = 'true';
+        }
+        messagesEl.appendChild(div);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    async function clearChat() {
+        if (isStreaming) return;
+        messagesEl.innerHTML = '';
+        try {
+            await fetch('/clear', { method: 'POST' });
+            statusText.textContent = '记忆已清空';
+        } catch (e) {
+            console.warn('清空记忆失败', e);
+        }
+    }
+
+    async function sendMessage() {
+        const text = userInput.value.trim();
+        if (!text || isStreaming) return;
+
+        isStreaming = true;
+        sendBtn.disabled = true;
+        userInput.disabled = true;
+        statusText.textContent = '⏳ 思考中…';
+
+        addMessage('user', text);
+        userInput.value = '';
+
+        const assistantDiv = document.createElement('div');
+        assistantDiv.className = 'message assistant';
+        assistantDiv.dataset.role = 'assistant';
+        assistantDiv.dataset.partial = 'true';
+        messagesEl.appendChild(assistantDiv);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+
+        try {
+            const response = await fetch('/chat_stream', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: text })
+            });
+
+            if (!response.ok) throw new Error('请求失败');
+
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder();
+            let accumulated = '';
+
+            while (true) {
+                const { value, done } = await reader.read();
+                if (done) break;
+                const chunk = decoder.decode(value, { stream: true });
+                const lines = chunk.split('\n');
+                for (const line of lines) {
+                    if (line.startsWith('data: ')) {
+                        const payload = line.slice(6).trim();
+                        if (payload === '[DONE]') continue;
+                        try {
+                            const data = JSON.parse(payload);
+                            if (data.content) {
+                                accumulated += data.content;
+                                assistantDiv.innerHTML = renderMarkdown(accumulated);
+                                messagesEl.scrollTop = messagesEl.scrollHeight;
+                            }
+                        } catch (e) { /* ignore */ }
+                    }
+                }
+            }
+
+            assistantDiv.dataset.partial = 'false';
+            statusText.textContent = '就绪';
+        } catch (error) {
+            assistantDiv.textContent = '❌ 出错了：' + error.message;
+            assistantDiv.dataset.partial = 'false';
+            statusText.textContent = '错误';
+        } finally {
+            isStreaming = false;
+            sendBtn.disabled = false;
+            userInput.disabled = false;
+            userInput.focus();
+        }
+    }
+    sendBtn.addEventListener('click', sendMessage);
+    userInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+    clearBtn.addEventListener('click', clearChat);
+
+    window.addEventListener('load', () => {
+        addMessage('assistant', '👋 你好！我是天气智能体，可以查询实时时间和天气。');
+        userInput.focus();
+    });
+    const showDocsBtn = document.getElementById('showDocsBtn');
+const docsContainer = document.getElementById('docsContainer');
+const messagesContainer = document.getElementById('messages');
+let docsVisible = false;
+
+showDocsBtn.addEventListener('click', async () => {
+    docsVisible = !docsVisible;
+    if (docsVisible) {
+        // 切换显示文档区域，隐藏聊天
+        messagesContainer.style.display = 'none';
+        docsContainer.style.display = 'block';
+        // 如果文档未加载，则请求
+        if (!docsContainer.dataset.loaded) {
+            try {
+                const response = await fetch('/docs/README.md'); // 或你的 md 文件路径
+                if (!response.ok) throw new Error('文档加载失败');
+                const mdContent = await response.text();
+                // 使用 marked 渲染
+                docsContainer.innerHTML = marked.parse(mdContent);
+                docsContainer.dataset.loaded = 'true';
+            } catch (error) {
+                docsContainer.innerHTML = `<p style="color:red;">❌ 文档加载失败: ${error.message}</p>`;
+            }
+        }
+    } else {
+        // 切回聊天
+        messagesContainer.style.display = 'flex';
+        docsContainer.style.display = 'none';
+    }
+});
+</script>
+</body>
+</html>

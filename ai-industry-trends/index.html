@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI 产业发展趋势 · 从算力到互联的硬科技革命</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/animations/animations.css">
+<link rel="stylesheet" href="assets/pitch-deck.css">
+</head>
+<body class="tpl-pitch-deck">
+<div class="deck">
+
+<!-- ====== 1. COVER ====== -->
+<section class="slide" data-title="Cover">
+  <div class="cover-bg"></div><div class="cover-blob"></div>
+  <p class="kicker anim-fade-up" data-anim="fade-up">AI INFRASTRUCTURE · 2026</p>
+  <h1 class="h1 anim-fade-up" data-anim="fade-up" style="animation-delay:.1s">AI 产业发展趋势<br><span class="gradient-text">从算力到互联的硬科技革命</span></h1>
+  <p class="lede mt-m anim-fade-up" data-anim="fade-up" style="animation-delay:.2s">拆解 CPU · GPU · 光模块 · PCB · 存储五大环节，看懂技术演进与投资脉络</p>
+  <div class="deck-footer"><span>📅 2026.06</span><span class="slide-number" data-current="1" data-total="13"></span></div>
+</section>
+
+<!-- ====== 2. WHY ====== -->
+<section class="slide" data-title="驱动力">
+  <span class="section-num">01</span>
+  <p class="num-tag">WHY NOW</p>
+  <h2 class="h2 mt-s">为什么 AI 基础设施<br>是当下最重要的硬科技赛道？</h2>
+  <div class="grid g3 mt-l anim-stagger-list">
+    <div class="metric"><div class="n">$420B</div><div class="l">2026 AI 芯片市场规模</div></div>
+    <div class="metric"><div class="n">$300B+</div><div class="l">四大云厂商 AI Capex 投入</div></div>
+    <div class="metric"><div class="n">10x</div><div class="l">算力需求每 18 个月翻番</div></div>
+  </div>
+  <p class="lede mt-l">大模型参数从百亿跃升至万亿，单集群 GPU 规模突破 10 万卡。整个 AI 基础设施链路——从计算、互联到散热——正经历**百年一遇的架构重构**。</p>
+</section>
+
+<!-- ====== 3. OVERVIEW ====== -->
+<section class="slide" data-title="全景图">
+  <span class="section-num">02</span>
+  <p class="num-tag">LANDSCAPE</p>
+  <h2 class="h2 mt-s">五大核心环节，<br>一个完整的产业闭环</h2>
+  <div class="grid g3 mt-l">
+    <div class="card card-hover anim-fade-up" data-anim="fade-up" style="animation-delay:0s">
+      <div style="font-size:40px;margin-bottom:8px">🧠</div>
+      <h4>CPU · 算力基石</h4><p class="dim">x86 vs ARM 争霸，AI 加速单元成标配</p>
+    </div>
+    <div class="card card-hover anim-fade-up" data-anim="fade-up" style="animation-delay:.08s">
+      <div style="font-size:40px;margin-bottom:8px">🚀</div>
+      <h4>GPU · 训练引擎</h4><p class="dim">Blackwell 领跑，ASIC 双线追击</p>
+    </div>
+    <div class="card card-hover anim-fade-up" data-anim="fade-up" style="animation-delay:.16s">
+      <div style="font-size:40px;margin-bottom:8px">💡</div>
+      <h4>光模块 · 互联通道</h4><p class="dim">800G→1.6T→3.2T，硅光/LPO 并行</p>
+    </div>
+    <div class="card card-hover anim-fade-up" data-anim="fade-up" style="animation-delay:.24s">
+      <div style="font-size:40px;margin-bottom:8px">📐</div>
+      <h4>PCB · 信号载体</h4><p class="dim">30层+ UBB，M9 超低损耗材料</p>
+    </div>
+    <div class="card card-hover anim-fade-up" data-anim="fade-up" style="animation-delay:.32s">
+      <div style="font-size:40px;margin-bottom:8px">💾</div>
+      <h4>存储 · 记忆基石</h4><p class="dim">HBM4 2048-bit，存内计算量产</p>
+    </div>
+    <div class="card card-hover anim-fade-up" data-anim="fade-up" style="animation-delay:.40s">
+      <div style="font-size:40px;margin-bottom:8px">❄️</div>
+      <h4>散热 · 能效挑战</h4><p class="dim">132kW/柜，液冷从可选变必选</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 4. CPU ====== -->
+<section class="slide" data-title="CPU">
+  <span class="section-num">03</span>
+  <p class="num-tag">CPU · 算力基石</p>
+  <h2 class="h2 mt-s">x86 与 ARM 两强争霸，<br>AI 加速单元成为标配</h2>
+  <div class="grid g3 mt-l">
+    <div class="card anim-fade-up" data-anim="fade-up" style="animation-delay:0s">
+      <h4>🔵 Intel Xeon 6</h4>
+      <div style="font-size:28px;font-weight:800;margin:8px 0">128 核</div>
+      <p class="dim">AMX 矩阵引擎 · DDR5 12CH · PCIe 5.0 ×88</p>
+      <span class="pill pill-accent" style="margin-top:12px">BF16/INT8 推理加速</span>
+    </div>
+    <div class="card anim-fade-up" data-anim="fade-up" style="animation-delay:.1s">
+      <h4>🔴 AMD EPYC 9005</h4>
+      <div style="font-size:28px;font-weight:800;margin:8px 0">192 核</div>
+      <p class="dim">Zen 5 · AVX-512 · CXL 2.0 · DDR5-6000</p>
+      <span class="pill pill-accent" style="margin-top:12px">384 线程 · 500W</span>
+    </div>
+    <div class="card anim-fade-up" data-anim="fade-up" style="animation-delay:.2s">
+      <h4>🟢 ARM Neoverse V3</h4>
+      <div style="font-size:28px;font-weight:800;margin:8px 0">每瓦 +40%</div>
+      <p class="dim">Graviton4 · Grace · AmpereOne 192 核</p>
+      <span class="pill pill-accent" style="margin-top:12px">ARM v9.2 · SVE2</span>
+    </div>
+  </div>
+  <div class="ask-box mt-l anim-fade-up" data-anim="fade-up" style="animation-delay:.3s;padding:32px 40px">
+    <p style="font-size:18px;color:#fff;margin:0">💡 CPU 不再是"通用计算"的代名词。内置 AI 加速器正让 CPU 在推理侧重新夺回话语权，ARM 凭每瓦性能优势在云原生场景加速渗透。</p>
+  </div>
+</section>
+
+<!-- ====== 5. GPU ====== -->
+<section class="slide" data-title="GPU">
+  <span class="section-num">04</span>
+  <p class="num-tag">GPU · 算力引擎</p>
+  <h2 class="h2 mt-s">Blackwell 领跑，<br>AMD + 自研 ASIC 双线追击</h2>
+  <div class="grid g4 mt-l anim-stagger-list">
+    <div class="metric"><div class="n" style="font-size:52px">20K+</div><div class="l">B200 FP4 TFLOPS</div></div>
+    <div class="metric"><div class="n" style="font-size:52px">192 GB</div><div class="l">HBM3e 显存</div></div>
+    <div class="metric"><div class="n" style="font-size:52px">8 TB/s</div><div class="l">HBM3e 带宽</div></div>
+    <div class="metric"><div class="n" style="font-size:52px">1,000W</div><div class="l">B200 单芯片 TDP</div></div>
+  </div>
+  <div class="grid g2 mt-l">
+    <div class="card anim-fade-up" data-anim="fade-up" style="animation-delay:0s">
+      <h4>🏆 NVIDIA 一骑绝尘</h4>
+      <p class="dim">~80% GPU 份额。Blackwell + NVLink 5 + 液冷整机柜构建系统级壁垒。B200 FP16 算力 4,500 TFLOPS。</p>
+    </div>
+    <div class="card anim-fade-up" data-anim="fade-up" style="animation-delay:.1s">
+      <h4>🔺 追赶者加速</h4>
+      <p class="dim">AMD MI450X 288GB HBM3e + ROCm 6.0。Google TPU v6 / AWS Trainium / Meta MTIA 自研 ASIC 推理芯片部署加速。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 6. 光模块 ====== -->
+<section class="slide" data-title="光模块">
+  <span class="section-num">05</span>
+  <p class="num-tag">光模块 · 互联通道</p>
+  <h2 class="h2 mt-s">800G → 1.6T → 3.2T<br>光电互联的速度革命</h2>
+  <div class="grid g2 mt-l">
+    <div class="card card-hover anim-fade-up" data-anim="fade-up" style="animation-delay:0s">
+      <h4>🔷 800G：2026 标配</h4>
+      <p class="dim">DR8/FR4/SR8 多模方案。单模块 ~14W，硅光版降至 ~10W。中际旭创、Coherent 主供。</p>
+      <span class="pill pill-accent">8×100G PAM4</span>
+    </div>
+    <div class="card card-hover anim-fade-up" data-anim="fade-up" style="animation-delay:.1s">
+      <h4>🔶 1.6T：2026H2 量产</h4>
+      <p class="dim">200G/lane × 8。CPO 将光引擎集成至 Switch ASIC 旁，功耗再降 40%+。OSFP-XD 封装。</p>
+      <span class="pill pill-accent">200G/lane · CPO</span>
+    </div>
+  </div>
+  <div class="grid g3 mt-l anim-stagger-list">
+    <div class="card"><h4>LPO 线性驱动</h4><p class="dim">去 DSP，功耗 -50%，延迟 < 5ns</p></div>
+    <div class="card"><h4>硅光 SiPh</h4><p class="dim">CMOS 兼容，2027 渗透率 > 30%</p></div>
+    <div class="card"><h4>TFLN 薄膜铌酸锂</h4><p class="dim">200G+ 单波速率关键使能技术</p></div>
+  </div>
+</section>
+
+<!-- ====== 7. PCB ====== -->
+<section class="slide" data-title="PCB">
+  <span class="section-num">06</span>
+  <p class="num-tag">PCB · 信号载体</p>
+  <h2 class="h2 mt-s">AI 服务器 PCB<br>四大升级方向</h2>
+  <div class="grid g2 mt-l">
+    <div class="card anim-fade-up" data-anim="fade-up" style="animation-delay:0s">
+      <h4>📐 层数 20L → 30L+</h4>
+      <p class="dim">GPU 模组板 UBB 已达 26-30 层，Switch 背板 34 层+，PDN 复杂度大幅提升。</p>
+    </div>
+    <div class="card anim-fade-up" data-anim="fade-up" style="animation-delay:.1s">
+      <h4>🔧 材料 M7 → M8 → M9</h4>
+      <p class="dim">M9 级 Df < 0.0015。松下 Megtron 8、台耀 TU-983 主流方案，超低损耗 CCL 需求爆发。</p>
+    </div>
+    <div class="card anim-fade-up" data-anim="fade-up" style="animation-delay:.2s">
+      <h4>📏 超大尺寸 HDI</h4>
+      <p class="dim">GB300 NVL72 单板 700×600mm+，Any-Layer 技术从手机走向数据中心。</p>
+    </div>
+    <div class="card anim-fade-up" data-anim="fade-up" style="animation-delay:.3s">
+      <h4>💪 高端产能紧缺</h4>
+      <p class="dim">臻鼎/欣兴/Ibiden/三星电机。AI 拉动高端 PCB 市场 CAGR 25%+，2026 供不应求。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 8. 存储 ====== -->
+<section class="slide" data-title="存储">
+  <span class="section-num">07</span>
+  <p class="num-tag">存储 · 记忆基石</p>
+  <h2 class="h2 mt-s">HBM4 即将登场，<br>存内计算从概念走向量产</h2>
+  <div class="grid g4 mt-l anim-stagger-list">
+    <div class="metric"><div class="n" style="font-size:48px">HBM3</div><div class="l">24 GB · 819 GB/s<br>12-Hi · 1024-bit</div></div>
+    <div class="metric"><div class="n" style="font-size:48px">HBM3e</div><div class="l">36 GB · 1.2 TB/s<br>12-Hi · 1024-bit</div></div>
+    <div class="metric"><div class="n" style="font-size:48px">HBM4</div><div class="l">64 GB · 2.0 TB/s<br>16-Hi · 2048-bit</div></div>
+    <div class="metric"><div class="n" style="font-size:48px">$400B+</div><div class="l">2026 全球 HBM<br>市场规模预估</div></div>
+  </div>
+  <div class="grid g3 mt-l">
+    <div class="card"><h4>🔺 SK 海力士 53%</h4><p class="dim">HBM3e 独家供货 NVIDIA</p></div>
+    <div class="card"><h4>🔺 PIM 存内计算</h4><p class="dim">HBM 直接执行矩阵运算</p></div>
+    <div class="card"><h4>🔺 CXL 3.0 内存池化</h4><p class="dim">打破"内存墙"瓶颈</p></div>
+  </div>
+</section>
+
+<!-- ====== 9. 散热 ====== -->
+<section class="slide" data-title="散热能效">
+  <span class="section-num">08</span>
+  <p class="num-tag">散热 · 能效挑战</p>
+  <h2 class="h2 mt-s">132kW/机柜时代，<br>液冷从"可选"变"必选"</h2>
+  <div class="grid g3 mt-l">
+    <div class="card anim-fade-up" data-anim="fade-up" style="animation-delay:0s">
+      <div style="font-size:48px;margin-bottom:4px">🌡️</div>
+      <h4>冷板式液冷</h4>
+      <p class="dim">2026 标配。PUE ~1.1。CDU 单台 1.5MW 散热能力。NVL72 出厂即液冷。Vertiv / CoolIT 主供。</p>
+    </div>
+    <div class="card anim-fade-up" data-anim="fade-up" style="animation-delay:.1s">
+      <div style="font-size:48px;margin-bottom:4px">💧</div>
+      <h4>浸没式液冷</h4>
+      <p class="dim">Tank + 氟化液。PUE < 1.05，散热密度极致。3M Novec 成本仍高。阿里/微软已部署。</p>
+    </div>
+    <div class="card anim-fade-up" data-anim="fade-up" style="animation-delay:.2s">
+      <div style="font-size:48px;margin-bottom:4px">🔬</div>
+      <h4>芯片级微通道</h4>
+      <p class="dim">微通道直触 Die 面。台积电/Cooltera 研发中。散热密度可达 1kW/cm²，面向下一代 Rubin。</p>
+    </div>
+  </div>
+  <div class="grid g2 mt-l">
+    <div class="metric"><div class="n" style="font-size:48px">$120B</div><div class="l">2026 液冷市场规模</div></div>
+    <div class="metric"><div class="n" style="font-size:48px">80%+</div><div class="l">2028 新建 AI DC 液冷渗透率</div></div>
+  </div>
+</section>
+
+<!-- ====== 10. 市场格局 ====== -->
+<section class="slide" data-title="市场格局">
+  <span class="section-num">09</span>
+  <p class="num-tag">市场 · 投资格局</p>
+  <h2 class="h2 mt-s">AI 芯片四强格局<br>+ 国产替代加速</h2>
+  <div class="grid g4 mt-l anim-stagger-list">
+    <div class="metric"><div class="n" style="font-size:48px">~80%</div><div class="l">NVIDIA GPU 份额</div></div>
+    <div class="metric"><div class="n" style="font-size:48px">~12%</div><div class="l">AMD 追赶中</div></div>
+    <div class="metric"><div class="n" style="font-size:48px">~5%</div><div class="l">自研 ASIC 合计</div></div>
+    <div class="metric"><div class="n" style="font-size:48px">15-20%</div><div class="l">中国 AI 芯片自给率</div></div>
+  </div>
+  <div class="grid g2 mt-l">
+    <div class="card">
+      <h4>🌏 国产替代</h4>
+      <p class="dim">华为 Ascend 910C 量产 · 寒武纪思元 690 · 海光 DCU 兼容 ROCm。东南亚封装测试产能扩建，Chiplet + CoWoS/EMIB 成"新摩尔定律"。</p>
+    </div>
+    <div class="card">
+      <h4>📈 云厂商 Capex 竞赛</h4>
+      <p class="dim">微软/谷歌/亚马逊/Meta 2026 AI Capex 合计超 $300B。xAI Colossus 10 万 GPU 集群已投产。</p>
+    </div>
+  </div>
+  <div class="row mt-l" style="gap:10px;flex-wrap:wrap">
+    <span class="pill pill-accent">NVIDIA</span><span class="pill pill-accent">AMD</span>
+    <span class="pill pill-accent">Broadcom</span><span class="pill pill-accent">SK海力士</span>
+    <span class="pill pill-accent">中际旭创</span><span class="pill pill-accent">华为昇腾</span>
+    <span class="pill pill-accent">Marvell</span><span class="pill pill-accent">Arista</span>
+  </div>
+</section>
+
+<!-- ====== 11. 总结 ====== -->
+<section class="slide" data-title="六大趋势">
+  <span class="section-num">10</span>
+  <p class="num-tag">OUTLOOK · 2026→2028</p>
+  <h2 class="h2 mt-s">六大确定性趋势</h2>
+  <div class="grid g3 mt-l">
+    <div class="card card-hover anim-fade-up" data-anim="fade-up" style="animation-delay:0s">
+      <h4>1️⃣ 算力持续翻倍</h4>
+      <p class="dim">GPU 每 2 年算力翻倍。ASIC 推理芯片 2028 占推理市场 30%+。</p>
+    </div>
+    <div class="card card-hover anim-fade-up" data-anim="fade-up" style="animation-delay:.08s">
+      <h4>2️⃣ 互联速率倍增</h4>
+      <p class="dim">800G→1.6T→3.2T。CPO 延迟降至 ns 级。NVLink 6→7。</p>
+    </div>
+    <div class="card card-hover anim-fade-up" data-anim="fade-up" style="animation-delay:.16s">
+      <h4>3️⃣ 存储带宽破墙</h4>
+      <p class="dim">HBM4→HBM4e，PIM 存内计算。CXL 3.0 内存池化。</p>
+    </div>
+    <div class="card card-hover anim-fade-up" data-anim="fade-up" style="animation-delay:.24s">
+      <h4>4️⃣ 液冷全面渗透</h4>
+      <p class="dim">2028 年 80%+ 新 DC 液冷。PUE 1.4→1.05。产业链 CAGR 35%+。</p>
+    </div>
+    <div class="card card-hover anim-fade-up" data-anim="fade-up" style="animation-delay:.32s">
+      <h4>5️⃣ 端侧 AI 崛起</h4>
+      <p class="dim">AI PC NPU 40+ TOPS。AI 手机、具身智能创造新增长极。</p>
+    </div>
+    <div class="card card-hover anim-fade-up" data-anim="fade-up" style="animation-delay:.40s">
+      <h4>6️⃣ 地缘重塑供应链</h4>
+      <p class="dim">国产替代加速。Chiplet + 先进封装成"新摩尔定律"。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 12. 投资 ====== -->
+<section class="slide" data-title="投资机会">
+  <span class="section-num">11</span>
+  <p class="num-tag">INVESTMENT</p>
+  <h2 class="h2 mt-s">核心赛道与投资标的</h2>
+  <div class="ask-box mt-l anim-fade-up" data-anim="fade-up" style="padding:48px 56px">
+    <div class="grid g3">
+      <div>
+        <div style="font-size:14px;opacity:.7;margin-bottom:8px">芯片</div>
+        <div style="font-size:20px;font-weight:700">NVIDIA · AMD · Broadcom</div>
+        <div style="font-size:20px;font-weight:700;margin-top:4px">华为昇腾 · 寒武纪</div>
+      </div>
+      <div>
+        <div style="font-size:14px;opacity:.7;margin-bottom:8px">互联 / 存储</div>
+        <div style="font-size:20px;font-weight:700">中际旭创 · Marvell</div>
+        <div style="font-size:20px;font-weight:700;margin-top:4px">SK 海力士 · Arista</div>
+      </div>
+      <div>
+        <div style="font-size:14px;opacity:.7;margin-bottom:8px">散热 / 封装 / PCB</div>
+        <div style="font-size:20px;font-weight:700">Vertiv · 臻鼎</div>
+        <div style="font-size:20px;font-weight:700;margin-top:4px">台积电 CoWoS · Ibiden</div>
+      </div>
+    </div>
+  </div>
+  <p class="lede mt-l" style="color:var(--text-2)">从 GPU → 光模块 → HBM → 先进封装 → 液冷，**全链路受益于 AI 算力扩张**。建议沿"卡脖子环节 × 国产替代 × 技术拐点"三条主线布局。</p>
+</section>
+
+<!-- ====== 13. Q&A ====== -->
+<section class="slide" data-title="Q and A">
+  <div class="cover-bg"></div>
+  <div class="big-q mt-l">AI 基础设施正经历<br>百年一遇的架构变革。</div>
+  <p class="lede mt-l" style="font-size:24px">每一个环节都值得深入跟踪。</p>
+  <div class="row mt-l" style="gap:24px">
+    <span class="pill pill-accent">📧 ai-research@example.com</span>
+    <span class="pill pill-accent">🔗 github.com/ai-trends</span>
+    <span class="pill pill-accent">📊 数据截止 2026.Q2</span>
+  </div>
+  <p style="margin-top:40px;font-size:14px;color:var(--text-3)">Thank You · Questions &amp; Discussion</p>
+  <div class="deck-footer"><span></span><span class="slide-number" data-current="13" data-total="13"></span></div>
+</section>
+
+</div>
+<script src="assets/runtime.js"></script>
+</body>
+</html>
